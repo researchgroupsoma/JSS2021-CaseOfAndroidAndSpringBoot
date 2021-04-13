@@ -258,10 +258,6 @@ ggsave("1-Projects/12-Graphics/RQ2/springVersions.pdf", width = 4.5, height = 4.
 
 
 
-
-
-
-
 ####### Delay to update
 framework1=read.csv(paste(mainDirectory, "1-Projects/7-DelayToUpdate/android_delay_output.csv", sep = ""), sep=",",header=T)
 framework2=read.csv(paste(mainDirectory, "1-Projects/7-DelayToUpdate/spring_delay_output.csv", sep = ""), sep=",",header=T)
@@ -274,7 +270,7 @@ framework1_median = median(unlist(dataFramework1), na.rm = TRUE)
 framework2_median = median(unlist(dataFramework2), na.rm = TRUE)
 aes = aes(factor(framework,levels = c(frameworkName1, frameworkName2)), delay_in_days+ 0.01)
 plotGraphic()
-ggsave(paste(mainDirectory, "delay/delay.pdf", sep = ""), width = 4.5, height = 4.5)
+ggsave(paste(mainDirectory, "1-Projects/12-Graphics/RQ2/delay.pdf", sep = ""), width = 4.5, height = 4.5)
 
 
 
@@ -282,29 +278,29 @@ ggsave(paste(mainDirectory, "delay/delay.pdf", sep = ""), width = 4.5, height = 
 framework1=read.csv(paste(mainDirectory, "1-Projects/10-Maintainers/android_maintainers_output.csv", sep = ""), sep=",",header=T)
 framework2=read.csv(paste(mainDirectory, "1-Projects/10-Maintainers/spring_maintainers_output.csv", sep = ""), sep=",",header=T)
 all=rbind.data.frame(framework1, framework2)
-dataFramework1=framework1$commom.sample*100
-dataFramework2=framework2$commom.sample*100
+dataFramework1=(framework1$commom_contributors/framework1$sample_contributors) * 100
+dataFramework2=(framework2$commom_contributors/framework2$sample_contributors) * 100
 title = "Framework Contributors Inside Code Sample Project"
 verticalTitle = "Percent of Contributors"
 framework1_median = median(unlist(dataFramework1), na.rm = TRUE)
 framework2_median = median(unlist(dataFramework2), na.rm = TRUE)
-aes = aes(factor(framework,levels = c(frameworkName1, frameworkName2)), (commom.sample+0.01) * 100)
+aes = aes(factor(framework,levels = c(frameworkName1, frameworkName2)), (sample_contributors+0.01))
 plotGraphic()
-ggsave(paste(mainDirectory, "maintainers/maintainers.pdf", sep = ""), width = 4.5, height = 4.5)
+ggsave(paste(mainDirectory, "1-Projects/12-Graphics/RQ2/maintainers.pdf", sep = ""), width = 4.5, height = 4.5)
 
 
 
 ####### Imports
-framework1=read.csv(paste(mainDirectory, "importcount/android_importcount_output.csv", sep = ""), sep=",",header=T)
-framework2=read.csv(paste(mainDirectory, "importcount/spring_importcount_output.csv", sep = ""), sep=",",header=T)
+framework1=read.csv(paste(mainDirectory, "1-Projects/9-FrameworkDependence/android_importcount_output.csv", sep = ""), sep=",",header=T)
+framework2=read.csv(paste(mainDirectory, "1-Projects/9-FrameworkDependence/spring_importcount_output.csv", sep = ""), sep=",",header=T)
 all=rbind.data.frame(framework1, framework2)
-dataFramework1=framework1$imports.java_files
-dataFramework2=framework2$imports.java_files
+dataFramework1=framework1$imports/framework1$javaFiles
+dataFramework2=framework2$imports/framework2$javaFiles
 title = "Relative Distinct Framework Imports"
-verticalTitle = "Imports"
+verticalTitle = "Imports (log scale)"
 framework1_median = median(unlist(dataFramework1), na.rm = TRUE)
 framework2_median = median(unlist(dataFramework2), na.rm = TRUE)
-aes = aes(factor(framework,levels = c(frameworkName1, frameworkName2)), imports.java_files)
+aes = aes(factor(framework,levels = c(frameworkName1, frameworkName2)), (imports/javaFiles)+0.01)
 plotGraphic()
 ggsave(paste(mainDirectory, "importcount/importcount.pdf", sep = ""), width = 4.5, height = 4.5)
 
@@ -314,18 +310,18 @@ ggsave(paste(mainDirectory, "importcount/importcount.pdf", sep = ""), width = 4.
 ###### RQ4
 
 ####### Relative ahead forks
-framework1=read.csv(paste(mainDirectory, "forksahead/android_forks_ahead_by_projects_output.csv", sep = ""), sep=",",header=T)
-framework2=read.csv(paste(mainDirectory, "forksahead/spring_forks_ahead_by_projects_output.csv", sep = ""), sep=",",header=T)
+framework1=read.csv(paste(mainDirectory, "1-Projects/11-Forks/1-NumberOfForks/android_forks_ahead_by_projects_output.csv", sep = ""), sep=",",header=T)
+framework2=read.csv(paste(mainDirectory, "1-Projects/11-Forks/1-NumberOfForks/spring_forks_ahead_by_projects_output.csv", sep = ""), sep=",",header=T)
 all=rbind.data.frame(framework1, framework2)
-dataFramework1=framework1$ratio * 100
-dataFramework2=framework2$ratio * 100
+dataFramework1=ceiling((framework1$forks_ahead/framework1$number_of_forks) * 100)
+dataFramework2=ceiling((framework2$forks_ahead/framework2$number_of_forks) * 100)
 title = "Relative Ahead Forks"
 verticalTitle = "Percent of Ahead Forks"
 framework1_median = median(unlist(dataFramework1), na.rm = TRUE)
 framework2_median = median(unlist(dataFramework2), na.rm = TRUE)
-aes = aes(factor(framework,levels = c(frameworkName1, frameworkName2)), ratio * 100)
+aes = aes(factor(framework,levels = c(frameworkName1, frameworkName2)), (forks_ahead/number_of_forks) * 100)
 plotGraphic()
-ggsave(paste(mainDirectory, "forksahead/relative_ahead_forks.pdf", sep = ""), width = 4.5, height = 4.5)
+ggsave(paste(mainDirectory, "1-Projects/12-Graphics/RQ4/relative_ahead_forks.pdf", sep = ""), width = 4.5, height = 4.5)
 
 
 
@@ -341,7 +337,7 @@ framework1_median = median(unlist(dataFramework1), na.rm = TRUE)
 framework2_median = median(unlist(dataFramework2), na.rm = TRUE)
 aes = aes(factor(framework,levels = c(frameworkName1, frameworkName2)), number_of_forks)
 plotGraphic()
-ggsave(paste(mainDirectory, "forksahead/number_of_forks.pdf", sep = ""), width = 4.5, height = 4.5)
+ggsave(paste(mainDirectory, "1-Projects/12-Graphics/RQ4/forks.pdf", sep = ""), width = 4.5, height = 4.5)
 
 
 ############################# Stack Overflow ###########################################
