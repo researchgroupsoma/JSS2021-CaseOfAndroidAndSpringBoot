@@ -65,6 +65,24 @@ plotGraphic()
 ggsave(paste(mainDirectory, "1-Projects/12-Graphics/Section3/files.pdf", sep = ""), width = 4.5, height = 4.5)
 
 
+
+
+
+
+
+plotGraphic <- function ()  {
+  p1 <- ggplot(all, aes) + 
+    scale_y_log10(labels = comma) +
+    geom_violin(width=1, trim=TRUE, fill="#87CEFA") + 
+    geom_boxplot(width=0.7,alpha=0.7) + ggtitle(title) + xlab(typeOfFramework) + ylab(verticalTitle) + 
+    annotate("text", x = 1.1, y = framework1_median*factorPositionMedianLabel, label = round(framework1_median, 2), size = 8) + annotate("text", x = 2.1, y = framework2_median*factorPositionMedianLabel, label = round(framework2_median, 2), size = 8) +
+    theme(plot.title=element_text(size=20,face="bold") ,axis.title=element_text(size=20),axis.text=element_text(size=18))
+  return(p1)
+}
+
+
+
+
 ###### RQ1
 
 ###### Java Files
@@ -132,8 +150,8 @@ ggsave(paste(mainDirectory, "1-Projects/12-Graphics/RQ1/ACC.pdf", sep = ""), wid
 
 
 #####Lifetime
-framework1=read.csv(paste(mainDirectory, "githubmetadata/android_metadata_output.csv", sep = ""), sep=",",header=T)
-framework2=read.csv(paste(mainDirectory, "githubmetadata/spring_metadata_output.csv", sep = ""), sep=",",header=T)
+framework1=read.csv(paste(mainDirectory, "1-Projects/3-GithubData/android_metadata_output.csv", sep = ""), sep=",",header=T)
+framework2=read.csv(paste(mainDirectory, "1-Projects/3-GithubData/spring_metadata_output.csv", sep = ""), sep=",",header=T)
 all=rbind.data.frame(framework1, framework2)
 dataFramework1=framework1$lifetime
 dataFramework2=framework2$lifetime
@@ -143,60 +161,110 @@ framework1_median = median(unlist(dataFramework1), na.rm = TRUE)
 framework2_median = median(unlist(dataFramework2), na.rm = TRUE)
 aes = aes(factor(framework,levels = c(frameworkName1, frameworkName2)), lifetime)
 plotGraphic()
-ggsave(paste(mainDirectory, "githubmetadata/lifetime.pdf", sep = ""), width = 4.5, height = 4.5)
+ggsave(paste(mainDirectory, "1-Projects/12-Graphics/RQ2/lifetime.pdf", sep = ""), width = 4.5, height = 4.5)
 
 
 
 #####Lifetime per commit
-framework1=read.csv(paste(mainDirectory, "githubmetadata/android_metadata_output.csv", sep = ""), sep=",",header=T)
-framework2=read.csv(paste(mainDirectory, "githubmetadata/spring_metadata_output.csv", sep = ""), sep=",",header=T)
+framework1=read.csv(paste(mainDirectory, "1-Projects/3-GithubData/android_metadata_output.csv", sep = ""), sep=",",header=T)
+framework2=read.csv(paste(mainDirectory, "1-Projects/3-GithubData/spring_metadata_output.csv", sep = ""), sep=",",header=T)
 all=rbind.data.frame(framework1, framework2)
 dataFramework1=framework1$lifetime/framework1$commits
 dataFramework2=framework2$lifetime/framework2$commits
 title = "Lifetime per commit"
 verticalTitle = "Frequency of commits (log scale)"
-framework1_median = median(unlist(dataFramework1), na.rm = TRUE)
-framework2_median = median(unlist(dataFramework2), na.rm = TRUE)
+framework1_median = ceiling(median(unlist(dataFramework1), na.rm = TRUE))
+framework2_median = ceiling(median(unlist(dataFramework2), na.rm = TRUE))
 aes = aes(factor(framework,levels = c(frameworkName1, frameworkName2)), lifetime/commits)
 plotGraphic()
-ggsave(paste(mainDirectory, "githubmetadata/lifetime_commits.pdf", sep = ""), width = 4.5, height = 4.5)
+ggsave(paste(mainDirectory, "1-Projects/12-Graphics/RQ2/lifetime_commits.pdf", sep = ""), width = 4.5, height = 4.5)
 
 
 
 ###### Versoes atual do framework Android
-framework1=read.csv(paste(mainDirectory, "currentframeworkversion/android_currentframeworkversion_output.csv", sep = ""), sep=",",header=T)
-table <- table(framework1$minSdkVersion)
-dataframe <- data.frame(table)
-subtipos = rep(c("TargetSdk", "MinSdk"), each=17)
-apiLevel <- rep( dataframe$Var1, 2 )
-values <- dataframe$Freq
-df2 <- data.frame(supp=subtipos,dose=apiLevel,len=values)
+framework1=read.csv(paste(mainDirectory, "1-Projects/8-CurrentFrameworkVersion/android_currentframeworkversion_output.csv", sep = ""), sep=",",header=T)
+
+table(framework1$minSdkVersion)
+table(framework1$targetSdkVersion)
+
+#MinSDK
+#19 21 22 23 24 25 26 27 28 29
+#12 56 0  20 20  4  6  0 10 0
+
+#Target
+#19  21  22  23  24  25  26  27  28  29 
+#1   8  15  19  13  14  17 107  72   9 
+
+subtipos = rep(c("TargetSdk", "MinSdk"), each=10)
+
+apiLevel <- rep( c("19", "21", "22", "23", "24", "25", "26", "27", "28", "29"), 2 )
+
+
+
+
+values <-c(1,8,15,19,13,14,17,107,72,9, 12,56,0,20,20,4,6,0,10,0)
+
+
+
+
+
+df2 <- data.frame(supp=subtipos,
+                  dose=apiLevel,
+                  len=values)
+head(df2)
+
+
+
 p <- ggplot(data=df2, aes(x=dose, y=len, fill=supp)) +
   geom_bar(stat="identity", position=position_dodge()) +
-  labs(title="Android Samples", x="API Level", y = "Number of Projects / Subprojects") +
+  labs(title="Android Versions", x="Versions of Code Samples", y = "Number of Projects / Subprojects") +
   scale_fill_manual("", values = c("MinSdk" = "#87CEFA", "TargetSdk" = "#4682b4"))+
-  theme(plot.title=element_text(size=20, face = "bold"), axis.title=element_text(size=18),axis.text=element_text(size=18), legend.position = c(0.2, 0.80))
-p
-ggsave(paste(mainDirectory, "currentframeworkversion/androidAPILevel.pdf", sep = ""), width = 4.5, height = 4.5)
+  theme(plot.title=element_text(size=20, face = "bold"), axis.title=element_text(size=20),axis.text=element_text(size=18), legend.position = c(0.2, 0.80))
 
+p
+
+
+ggsave("1-Projects/12-Graphics/RQ2/androidAPILevel.pdf", width = 4.5, height = 4.5) 
 
 
 ###### Versoes atual do framework Spring
-framework1=read.csv(paste(mainDirectory, "currentframeworkversion/spring_currentframeworkversion_output.csv", sep = ""), sep=",",header=T)
-table <- table(framework1$version)
-dataframe <- data.frame(table)
-p <- ggplot(data=dataframe, aes(x=Var1, y=Freq)) +
-  geom_bar(stat="identity", position=position_dodge()) +
-  labs(title="Spring Samples", x="Spring Version", y = "Number of Projects / Subprojects") +
-  theme(plot.title=element_text(size=20, face = "bold"), axis.title=element_text(size=18),axis.text=element_text(size=18), legend.position = c(0.2, 0.80))
+framework1=read.csv(paste(mainDirectory, "1-Projects/8-CurrentFrameworkVersion/spring_currentframeworkversion_output.csv", sep = ""), sep=",",header=T)
+table(framework1$version)
+
+#2.0.2.RELEASE 2.1.7.RELEASE 2.1.8.RELEASE 2.2.0.RELEASE 2.2.1.RELEASE 2.2.2.RELEASE 
+#1             2             2            24            22            67 
+#2.2.4.RELEASE 2.2.6.RELEASE 2.3.0.RELEASE 
+#3             2             2 
+
+springVersion <- c("2.2.0", "2.2.1", "2.2.2")
+values <-c(24,	22, 67)
+
+
+df2 <- data.frame(dose=springVersion,
+                  len=values)
+head(df2)
+
+
+
+p <- ggplot(data=df2, aes(x=dose, y=len)) +
+  geom_bar(stat="identity", position=position_dodge(), fill = "#87CEFA") +
+  labs(title="Spring Boot Versions", x="Versions of Code Samples", y = "Number of Projects / Subprojects") +
+  theme(plot.title=element_text(size=20, face = "bold"), axis.title=element_text(size=18),axis.text=element_text(size=18))
+
+
 p
-ggsave(paste(mainDirectory, "currentframeworkversion/springVersions.pdf", sep = ""), width = 4.5, height = 4.5)
+
+ggsave("1-Projects/12-Graphics/RQ2/springVersions.pdf", width = 4.5, height = 4.5) 
+
+
+
+
 
 
 
 ####### Delay to update
-framework1=read.csv(paste(mainDirectory, "delay/android_delay_output.csv", sep = ""), sep=",",header=T)
-framework2=read.csv(paste(mainDirectory, "delay/spring_delay_output.csv", sep = ""), sep=",",header=T)
+framework1=read.csv(paste(mainDirectory, "1-Projects/7-DelayToUpdate/android_delay_output.csv", sep = ""), sep=",",header=T)
+framework2=read.csv(paste(mainDirectory, "1-Projects/7-DelayToUpdate/spring_delay_output.csv", sep = ""), sep=",",header=T)
 all=rbind.data.frame(framework1, framework2)
 dataFramework1=framework1$delay_in_days
 dataFramework2=framework2$delay_in_days
@@ -211,16 +279,16 @@ ggsave(paste(mainDirectory, "delay/delay.pdf", sep = ""), width = 4.5, height = 
 
 
 ####### Mantenedores
-framework1=read.csv(paste(mainDirectory, "maintainers/android_maintainers_output.csv", sep = ""), sep=",",header=T)
-framework2=read.csv(paste(mainDirectory, "maintainers/spring_maintainers_output.csv", sep = ""), sep=",",header=T)
+framework1=read.csv(paste(mainDirectory, "1-Projects/10-Maintainers/android_maintainers_output.csv", sep = ""), sep=",",header=T)
+framework2=read.csv(paste(mainDirectory, "1-Projects/10-Maintainers/spring_maintainers_output.csv", sep = ""), sep=",",header=T)
 all=rbind.data.frame(framework1, framework2)
-dataFramework1=framework1$commom.sample
-dataFramework2=framework2$commom.sample
+dataFramework1=framework1$commom.sample*100
+dataFramework2=framework2$commom.sample*100
 title = "Framework Contributors Inside Code Sample Project"
 verticalTitle = "Percent of Contributors"
 framework1_median = median(unlist(dataFramework1), na.rm = TRUE)
 framework2_median = median(unlist(dataFramework2), na.rm = TRUE)
-aes = aes(factor(framework,levels = c(frameworkName1, frameworkName2)), commom.sample+0.01)
+aes = aes(factor(framework,levels = c(frameworkName1, frameworkName2)), (commom.sample+0.01) * 100)
 plotGraphic()
 ggsave(paste(mainDirectory, "maintainers/maintainers.pdf", sep = ""), width = 4.5, height = 4.5)
 
