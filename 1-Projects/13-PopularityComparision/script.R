@@ -28,6 +28,15 @@ cliff.delta(androidtop$CountLineCode, androidbottom$CountLineCode)
 wilcox.test(springtop$CountLineCode, springbottom$CountLineCode)
 cliff.delta(springtop$CountLineCode, springbottom$CountLineCode)
 
+
+# Relative Commented Lines - comment_rel - RCL
+wilcox.test((androidtop$CountLineComment/androidtop$CountLine), (androidbottom$CountLineComment/androidbottom$CountLine))
+cliff.delta((androidtop$CountLineComment/androidtop$CountLine), (androidbottom$CountLineComment/androidbottom$CountLine))
+
+wilcox.test((springtop$CountLineComment/springtop$CountLine), (springbottom$CountLineComment/springbottom$CountLine))
+cliff.delta((springtop$CountLineComment/springtop$CountLine), (springbottom$CountLineComment/springbottom$CountLine))
+
+
 # Complexity
 #Soma C.C.
 
@@ -37,14 +46,6 @@ cliff.delta(androidtop$SumCyclomaticStrict, androidbottom$SumCyclomaticStrict)
 wilcox.test(springtop$SumCyclomaticStrict, springbottom$SumCyclomaticStrict)
 cliff.delta(springtop$SumCyclomaticStrict, springbottom$SumCyclomaticStrict)
 
-
-
-# Relative Commented Lines - comment_rel - RCL
-wilcox.test((androidtop$CountLineComment/androidtop$CountLine), (androidbottom$CountLineComment/androidbottom$CountLine))
-cliff.delta((androidtop$CountLineComment/androidtop$CountLine), (androidbottom$CountLineComment/androidbottom$CountLine))
-
-wilcox.test((springtop$CountLineComment/springtop$CountLine), (springbottom$CountLineComment/springbottom$CountLine))
-cliff.delta((springtop$CountLineComment/springtop$CountLine), (springbottom$CountLineComment/springbottom$CountLine))
 
 
 # Lifetime - lifetime
