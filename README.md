@@ -27,4 +27,4 @@ In that repository you will find the data collected and used for all analysis of
 ### [Categorization of Questions](https://github.com/researchgroupsoma/JSS2021-CaseOfAndroidAndSpringBoot/blob/main/2-StackOverflow/QuestionClassification)
 ### [Modification Analysis](https://github.com/researchgroupsoma/JSS2021-CaseOfAndroidAndSpringBoot/blob/main/2-StackOverflow/TagCounter)
 # Data of GitHub Issues Analysis
-### [Issues](%28https://github.com/researchgroupsoma/JSS2021-CaseOfAndroidAndSpringBoot/blob/main/3-Issues/1-IssueAnalysis)
+### [Issues](https://github.com/researchgroupsoma/JSS2021-CaseOfAndroidAndSpringBoot/blob/main/3-Issues/1-IssueAnalysis)
