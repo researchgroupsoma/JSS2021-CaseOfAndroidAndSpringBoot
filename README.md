@@ -2,25 +2,29 @@
 
 In that repository you will find the data collected and used for all analysis of the paper
 
-#  Data of Code Samples
+#  Data of Code Samples and Conventional Projects
+### [GitHub Metadata](https://github.com/researchgroupsoma/JSS2021-CaseOfAndroidAndSpringBoot/tree/main/1-Projects/3-GithubData)
 
-StackEdit stores your files in your browser, which means all your files are automatically saved locally and are accessible **offline!**
+### [Extension Files](https://github.com/researchgroupsoma/JSS2021-CaseOfAndroidAndSpringBoot/tree/main/1-Projects/4-NumberOfExtensionFiles)
 
-#  Data of Coventional Projects
+### [Scitools Understand Metrics](https://github.com/researchgroupsoma/JSS2021-CaseOfAndroidAndSpringBoot/tree/main/1-Projects/5-UnderstandMetrics)
 
-The file explorer is accessible using the button in left corner of the navigation bar. You can create a new file by clicking the **New file** button in the file explorer. You can also create folders by clicking the **New folder** button.
+### [Extension Changes](https://github.com/researchgroupsoma/JSS2021-CaseOfAndroidAndSpringBoot/tree/main/1-Projects/6-FileExtensionChanges)
 
-# Data of Comparision
+### [Delay to Update](https://github.com/researchgroupsoma/JSS2021-CaseOfAndroidAndSpringBoot/tree/main/1-Projects/7-DelayToUpdate)
 
-All your files and folders are presented as a tree in the file explorer. You can switch from one to another by clicking a file in the tree.
+### [Framework Version](https://github.com/researchgroupsoma/JSS2021-CaseOfAndroidAndSpringBoot/tree/main/1-Projects/8-CurrentFrameworkVersion)
+
+### [Framework Dependency](https://github.com/researchgroupsoma/JSS2021-CaseOfAndroidAndSpringBoot/tree/main/1-Projects/9-FrameworkDependence)
+
+### [Maintainers](https://github.com/researchgroupsoma/JSS2021-CaseOfAndroidAndSpringBoot/tree/main/1-Projects/10-Maintainers)
+
+### [Fork Analysis](https://github.com/researchgroupsoma/JSS2021-CaseOfAndroidAndSpringBoot/tree/main/1-Projects/11-Forks)
+
+### [Popularity](https://github.com/researchgroupsoma/JSS2021-CaseOfAndroidAndSpringBoot/tree/main/1-Projects/13-PopularityComparision)
 
 # Data of Stack Overflow Analysis
-## Categorization of Questions
-[Android Questions](https://github.com/researchgroupsoma/JSS2021-CaseOfAndroidAndSpringBoot/blob/main/2-StackOverflow/QuestionClassification/android.csv)
-[Spring Questions](https://github.com/researchgroupsoma/JSS2021-CaseOfAndroidAndSpringBoot/blob/main/2-StackOverflow/QuestionClassification/spring.csv)
-## Modification Analysis
-[Android Tags](https://github.com/researchgroupsoma/JSS2021-CaseOfAndroidAndSpringBoot/blob/main/2-StackOverflow/TagCounter/android-tags.csv)
-[Spring Tags](https://github.com/researchgroupsoma/JSS2021-CaseOfAndroidAndSpringBoot/blob/main/2-StackOverflow/TagCounter/spring-tags.csv)
+### [Categorization of Questions](https://github.com/researchgroupsoma/JSS2021-CaseOfAndroidAndSpringBoot/blob/main/2-StackOverflow/QuestionClassification)
+### [Modification Analysis](https://github.com/researchgroupsoma/JSS2021-CaseOfAndroidAndSpringBoot/blob/main/2-StackOverflow/TagCounter)
 # Data of GitHub Issues Analysis
-
-You can delete the current file by clicking the **Remove** button in the file explorer. The file will be moved into the **Trash** folder and automatically deleted after 7 days of inactivity.
+### [Issues](%28https://github.com/researchgroupsoma/JSS2021-CaseOfAndroidAndSpringBoot/blob/main/3-Issues/1-IssueAnalysis)
