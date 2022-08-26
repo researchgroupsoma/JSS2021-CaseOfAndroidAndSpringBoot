@@ -1,3 +1,8 @@
+Repository of paper: "How Are Framework Code Samples  Maintained and Used by Developers? The Case of Android and Spring Boot"
+
+Available in https://doi.org/10.1016/j.jss.2021.111146
+
+
 # How Are Framework Code Samples  Maintained and Used by Developers? The Case of Android and SpringBoot
 
 In that repository you will find the data collected and used for all analysis of the paper
